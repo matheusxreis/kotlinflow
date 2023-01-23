@@ -3,6 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="message"
+            type="com.matheusxreis.kotlinflow.models.Message"
+        />
 
     </data>
 
@@ -31,7 +35,7 @@
                 android:layout_marginBottom="2dp">
 
                 <TextView
-                    android:text="Hello baby"
+                    android:text="@{message.text}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintTop_toTopOf="parent"
