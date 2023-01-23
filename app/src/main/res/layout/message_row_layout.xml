@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -13,7 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp"
         >
 
         <com.google.android.material.card.MaterialCardView
@@ -27,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:cardCornerRadius="6dp"
-            android:elevation="2dp"
+            android:elevation="8dp"
             app:cardBackgroundColor="@color/purple_200">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -39,6 +40,7 @@
                 android:layout_marginBottom="2dp">
 
                 <TextView
+                    tools:text="hello, how are you?"
                     android:text="@{message.text}"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -46,11 +48,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     android:textColor="@android:color/white"
                     android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:ellipsize="end"
+                    android:textSize="16sp"
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+        <TextView
+            isMessageMine="@{message.from}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="@id/message_row_layout"
+            app:layout_constraintTop_toBottomOf="@id/message_row_layout"
+            app:layout_constraintEnd_toEndOf="@id/message_row_layout"
+            app:layout_constraintHorizontal_bias="0"
+            android:text="by you"
+            android:layout_marginTop="0dp"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
