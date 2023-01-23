@@ -8,7 +8,7 @@ import com.matheusxreis.kotlinflow.models.Message
 
 class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
 
-    val messages = listOf<Message>()
+    var messages = listOf<Message>()
     class MessageViewHolder(private val binding: MessageRowLayoutBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(message: Message){
@@ -28,5 +28,10 @@ class MessageAdapter: RecyclerView.Adapter<MessageAdapter.MessageViewHolder>() {
     }
 
     override fun getItemCount(): Int = messages.size
+
+    fun setData(data:List<Message>){
+        messages = data
+        notifyItemInserted(itemCount)
+    }
 
 }
