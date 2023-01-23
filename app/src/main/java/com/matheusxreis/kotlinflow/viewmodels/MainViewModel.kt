@@ -1,25 +1,39 @@
 package com.matheusxreis.kotlinflow.viewmodels
 
+import android.util.Log
 import android.view.View
 import android.widget.ViewSwitcher.ViewFactory
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.matheusxreis.kotlinflow.data.MessageRepository
 import com.matheusxreis.kotlinflow.models.Message
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class MainViewModel constructor(private val repository: MessageRepository): ViewModel() {
+class MainViewModel constructor(private val repository: MessageRepository) : ViewModel() {
 
-    val message:MutableLiveData<List<Message>> = MutableLiveData()
+    val message: MutableLiveData<List<Message>> = MutableLiveData()
 
-    fun observeMessages(){
-
-        message.value = repository.observeMessages()
+    init {
+        message.value = listOf()
     }
+
+    fun observeMessages() = GlobalScope.launch {
+        repository.observeMessages().collect { m ->
+            updateLiveData(m)
+        }
+
+    }
+
+    private fun updateLiveData(m: Message) {
+         val value = message.value?.plus(m)
+         message.postValue(value)
+    }
+
 
     class MainViewModelFactory(
         private val repository: MessageRepository
-    ): ViewModelProvider.Factory {
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return MainViewModel(repository) as T
         }
