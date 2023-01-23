@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.matheusxreis.kotlinflow.adapters.MessageAdapter
+import com.matheusxreis.kotlinflow.data.MessageRepository
 import com.matheusxreis.kotlinflow.databinding.ActivityMainBinding
 import com.matheusxreis.kotlinflow.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(this, MainViewModel.MainViewModelFactory(MessageRepository())).get(MainViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         setupRecyclerView()
