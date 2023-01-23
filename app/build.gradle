@@ -1,16 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+
 }
 
 android {
     namespace 'com.matheusxreis.kotlinflow'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.matheusxreis.kotlinflow"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -30,6 +32,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding {
+            enabled = true
+        }
+    }
+
 }
 
 dependencies {
@@ -44,4 +52,8 @@ dependencies {
 
     // material components
     implementation 'com.google.android.material:material:1.9.0-alpha01'
+
+    // data binding
+    kapt "com.android.databinding:compiler:3.2.0-alpha10"
+    kapt "androidx.databinding:databinding-common:7.4.0"
 }
