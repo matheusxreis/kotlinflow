@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
         populateRecyclerView()
+        getMessages()
     }
 
     fun setupRecyclerView(){
@@ -38,5 +39,9 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.message.observe(this) {
             messageAdapter.setData(it)
         }
+    }
+
+    fun getMessages(){
+        mainViewModel.observeMessages()
     }
 }
